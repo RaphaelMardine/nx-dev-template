@@ -1,4 +1,7 @@
+'use client';
 import styles from './page.module.css';
+import { Button } from '@v4company/shared';
+import './global.css';
 
 export default function Index() {
   /*
@@ -15,6 +18,22 @@ export default function Index() {
               <span> Hello there, </span>
               Welcome mktlab-frontend 👋
             </h1>
+            <div
+              style={{
+                display: 'flex',
+                width: '100%',
+                justifyContent: 'center',
+                padding: '2rem',
+              }}
+            >
+              <Button
+                style={{ backgroundColor: 'red' }}
+                variant="secondary"
+                onClick={() => alert('teste')}
+              >
+                teste botão
+              </Button>
+            </div>
           </div>
 
           <div id="hero" className="rounded">
