@@ -1,0 +1,9 @@
+{
+  "name": "mktlab-frontend",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/mktlab-frontend",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project mktlab-frontend --web",
+  "targets": {}
+}
