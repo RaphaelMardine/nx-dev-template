@@ -1,4 +1,12 @@
 import './global.css';
+import { Noto_Sans as FontSans } from 'next/font/google';
+
+import { cn } from '@v4company/ui-components/utils';
+
+const fontSans = FontSans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
 
 export const metadata = {
   title: 'Welcome to mktlab-frontend',
@@ -12,7 +20,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body
+        className={cn(
+          'min-h-screen bg-background font-sans antialiased',
+          fontSans.variable
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }

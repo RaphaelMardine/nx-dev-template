@@ -15,10 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@v4company/shared": ["shared/src/index.ts"],
-      "@v4company/shared/server": ["shared/src/server.ts"],
-      "@nx-shadcnui/shared": ["shared/src/index.ts"],
-      "@nx-shadcnui/shared/*": ["shared/src/*"]
+      "@v4company/ui-components": ["shared/ui-components/src/index.ts"],
+      "@v4company/ui-components/*": ["shared/ui-components/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

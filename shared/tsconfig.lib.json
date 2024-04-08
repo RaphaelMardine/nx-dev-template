@@ -12,14 +12,19 @@
   },
   "exclude": [
     "jest.config.ts",
-    "src/**/*.spec.ts",
-    "src/**/*.test.ts",
-    "src/**/*.spec.tsx",
-    "src/**/*.test.tsx",
-    "src/**/*.spec.js",
-    "src/**/*.test.js",
-    "src/**/*.spec.jsx",
-    "src/**/*.test.jsx"
+    "ui-components/src/**/*.spec.ts",
+    "ui-components/src/**/*.test.ts",
+    "ui-components/src/**/*.spec.tsx",
+    "ui-components/src/**/*.test.tsx",
+    "ui-components/src/**/*.spec.js",
+    "ui-components/src/**/*.test.js",
+    "ui-components/src/**/*.spec.jsx",
+    "ui-components/src/**/*.test.jsx"
   ],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "ui-components/src/**/*.js",
+    "ui-components/src/**/*.jsx",
+    "ui-components/src/**/*.ts",
+    "ui-components/src/**/*.tsx"
+  ]
 }
