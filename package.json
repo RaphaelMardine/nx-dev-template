@@ -9,6 +9,9 @@
     "build": "npx nx build mktlab-frontend",
     "format": "prettier --write ."
   },
+  "engines": {
+    "node": ">=20"
+  },
   "private": true,
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.0.6",
