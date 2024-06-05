@@ -1,7 +1,17 @@
 import './global.css';
+import 'v4design-tokens/dist/Internal-Domain/HQ_FC/css/variables.css';
 import { Noto_Sans as FontSans } from 'next/font/google';
 
 import { cn } from '@v4company/ui-components/utils';
+
+import { HeaderProvider } from '@v4company/providers/headerProvider';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { AuthProvider } from '@v4company/contexts/auth';
+
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import { cookies } from 'next/headers';
+import { ReactQueryProvider } from '@v4company/hooks';
+import { Toaster } from '@v4company/ui-components';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -18,15 +28,36 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const v4cookie = cookies().get('v4company.token');
+  let isValid = false;
+
+  const decodedToken: JwtPayload = jwt.decode(
+    v4cookie?.value as string
+  ) as JwtPayload;
+
+  if (decodedToken && decodedToken.exp) {
+    const currentTime = Math.floor(Date.now() / 1000);
+    const expirationTime = decodedToken.exp;
+
+    isValid = currentTime < expirationTime;
+  }
+
   return (
     <html lang="en">
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased',
+          'min-h-screen bg-color-gray-100 font-sans antialiased',
           fontSans.variable
         )}
       >
-        {children}
+        <ReactQueryProvider>
+          <AuthProvider>
+            <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID!}>
+              <HeaderProvider>{children}</HeaderProvider>
+              <Toaster />
+            </GoogleOAuthProvider>
+          </AuthProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

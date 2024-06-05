@@ -1,0 +1,11 @@
+[[plugins]]
+package = "./tools/plugins/netlify/stop-build"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+[functions]
+  external_node_modules = ["sharp"]
+  included_files = ["node_modules/sharp/**/*"]
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

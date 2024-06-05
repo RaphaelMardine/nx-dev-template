@@ -23,6 +23,9 @@
     --destructive-foreground: 210 40% 98%;
     --ring: 215 20.2% 65.1%;
     --radius: 0.5rem;
+    --lab-ds-core-color-gray-01-100: #fafafa;
+    --lab-ds-core-border-gray-strong: #dbdbdb;
+    --lab-ds-core-color-gray-default: #e8e8e8;
   }
   .dark {
     --background: 224 71% 4%;
