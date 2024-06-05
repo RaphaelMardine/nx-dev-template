@@ -60,7 +60,6 @@ export const WithdrawModal = ({
       accountType: form.getValues('accontType'),
       bankCc: form.getValues('bankCC'),
       respName: form.getValues('respName'),
-      respCpf: form.getValues('respCpf'),
     };
 
     const response = await createAccount(bankAccount);

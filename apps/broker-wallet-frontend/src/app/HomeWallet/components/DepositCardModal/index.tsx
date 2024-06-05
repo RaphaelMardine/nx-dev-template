@@ -3,7 +3,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Form } from '@v4company/ui-components/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { addFunds, verifyAccount } from '../../../../common/services/requests';
+import {
+  addFunds,
+  createAccount,
+  verifyAccount,
+} from '../../../../common/services/requests';
 import { PaymentDetails } from '../../../../common/types';
 import { Address } from './Address';
 import { PropertyCard } from './PropertyCard';
@@ -43,6 +47,12 @@ export interface IFormCardInputs {
   cardToken: string;
   value: string;
   installments: string;
+  telephone: string;
+  bank?: string;
+  bankAg?: string;
+  accontType?: string;
+  bankCC?: string;
+  respName?: string;
 }
 
 export const DepositCardModal = ({
@@ -96,6 +106,32 @@ export const DepositCardModal = ({
     });
   }, [form, toast]);
 
+  const handleSendBankAccount = useCallback(async () => {
+    const bankAccount = {
+      unitId: '0b62af3b-da1c-4e64-82de-326e86aa48ea',
+      telephone: form.getValues('telephone'),
+      bank: form.getValues('bank'),
+      bankAg: form.getValues('bankAg'),
+      accountType: form.getValues('accontType'),
+      bankCc: form.getValues('bankCC'),
+      respName: form.getValues('respName'),
+    };
+
+    const response = await createAccount(bankAccount);
+
+    if (response.error) {
+      toast({
+        title: 'Erro ao configurar conta bancária',
+        description:
+          'Tente novamente mais tarde, se o erro persistir, entre em contato com o suporte.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setStepSelect('propertyCard');
+  }, [form, toast]);
+
   const onSubmit: SubmitHandler<IFormCardInputs> = useCallback(
     async (data: IFormCardInputs) => {
       if (schema.parse(data)) {
@@ -114,7 +150,7 @@ export const DepositCardModal = ({
               setStepSelect('propertyCard');
             },
           },
-          account: { action: () => setStepSelect('propertyCard') },
+          account: { action: () => handleSendBankAccount() },
           propertyCard: { action: () => setStepSelect('infoCard') },
           infoCard: { action: () => getToken() },
           amountCard: { action: () => setStepSelect('summary') },
