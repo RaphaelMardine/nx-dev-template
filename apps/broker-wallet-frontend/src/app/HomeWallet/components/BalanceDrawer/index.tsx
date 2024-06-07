@@ -165,7 +165,9 @@ export const BalanceDrawer = ({
                             </span>
                             <span className="flex items-start justify-end gap-2 text-xs">
                               <b>Vencimento:</b>
-                              {formatDate(bonus?.expiresAt as Date)}
+                              {bonus?.expiresAt
+                                ? formatDate(bonus?.expiresAt as Date)
+                                : '-'}
                             </span>
                           </div>
                         </div>
