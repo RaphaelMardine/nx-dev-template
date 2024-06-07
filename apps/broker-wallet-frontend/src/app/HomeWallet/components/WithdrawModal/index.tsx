@@ -17,6 +17,7 @@ import { ErrorWithdraw } from './ErrorWithdraw';
 import { useQuery } from '@tanstack/react-query';
 import { newWithdraw } from '../../../../common/services/requests/newWithdraw';
 import { withdrawSchema } from '../../constants';
+import { InfoWithdraw } from './InfoWithdraw';
 
 interface DepositModalProps {
   onClose: () => void;
@@ -138,7 +139,7 @@ export const WithdrawModal = ({
     }
 
     if (withdrawDetails.data) {
-      onClose();
+      setStepSelect('infoWithdraw');
     }
   }, [form, onClose]);
 
@@ -169,6 +170,9 @@ export const WithdrawModal = ({
           handleSendWithdraw={handleSendWithdraw}
         />
       ),
+    },
+    infoWithdraw: {
+      component: <InfoWithdraw />,
     },
     loading: {
       component: <Loading />,

@@ -1,14 +1,17 @@
 import { TransactionsResponse } from 'apps/broker-wallet-frontend/src/common/types';
+import { badge } from '../constants';
+import { convertCentsToBRL, formatDate } from '@v4company/utils';
+import { getTypeTransaction } from './getTypeTransaction';
 
 export function dataToExportFromJson(data: TransactionsResponse[] | undefined) {
   const dataToSend = data?.map((item: TransactionsResponse) => {
     return {
       id: item._id || '-',
-      tipo: item.type || '-',
+      tipo: getTypeTransaction(item.type) || '-',
       autor: item.user.name || '-',
-      data: item.createdAt || '-',
-      status: item.status || '-',
-      valor: item.amount || '-',
+      data: formatDate(item.createdAt) || '-',
+      status: badge[item.status]?.label || '-',
+      valor: convertCentsToBRL(item.amount) || '-',
     };
   });
 

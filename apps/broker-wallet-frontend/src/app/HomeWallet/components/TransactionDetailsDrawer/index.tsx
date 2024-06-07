@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import {
   AvatarFallback,
   AvatarImage,
@@ -38,8 +38,10 @@ export const TransactionDetailsDrawer = ({
   transaction,
 }: BalanceDrawerProps) => {
   const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const handleDownloadReceipt = async () => {
+    setLoading(true);
     const pdf = await postPdfReceipt(
       transaction?._id,
       transaction?.wasReimbursed || false
@@ -52,6 +54,7 @@ export const TransactionDetailsDrawer = ({
     const url = URL.createObjectURL(buffer);
 
     window.open(url, '_blank');
+    setLoading(false);
   };
 
   const transactionStatus = transaction?.status;
@@ -177,6 +180,7 @@ export const TransactionDetailsDrawer = ({
               <Button
                 variant="destructive"
                 className="gap-2 rounded-full"
+                disabled={loading}
                 onClick={handleDownloadReceipt}
               >
                 Baixar comprovante <Download size={16} />

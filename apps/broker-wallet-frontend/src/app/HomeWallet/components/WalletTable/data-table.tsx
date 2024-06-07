@@ -82,8 +82,16 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  const rowIsClickable = (type: string) => {
-    return type === 'DEPOSIT' || type === 'WITHDRAWAL';
+  const rowIsClickable = ({
+    type,
+    method,
+  }: {
+    type: string;
+    method: string;
+  }) => {
+    return (
+      (type === 'DEPOSIT' || type === 'WITHDRAWAL') && method !== 'HEADQUARTER'
+    );
   };
   return (
     <div>
@@ -113,17 +121,11 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   className={`${
-                    rowIsClickable(row.getValue<{ type: string }>('type').type)
-                      ? 'cursor-pointer'
-                      : ''
+                    rowIsClickable(row.getValue('type')) ? 'cursor-pointer' : ''
                   }`}
                   data-state={row.getIsSelected() && 'selected'}
                   onClick={() => {
-                    if (
-                      rowIsClickable(
-                        row.getValue<{ type: string }>('type').type
-                      )
-                    ) {
+                    if (rowIsClickable(row.getValue('type'))) {
                       handleRowClick?.(row.original);
                     }
                   }}

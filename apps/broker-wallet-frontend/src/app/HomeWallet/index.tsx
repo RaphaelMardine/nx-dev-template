@@ -17,7 +17,7 @@ import {
 } from '@v4company/ui-components';
 import { useContext } from 'react';
 import { AuthContext } from '@v4company/contexts';
-import { Download, Slash } from 'lucide-react';
+import { Download, Slash, X } from 'lucide-react';
 import { DateRangePicker, WalletHeader, WalletTable } from './components';
 import { useState } from 'react';
 import exportFromJSON from 'export-from-json';
@@ -83,10 +83,22 @@ export default function HomeWallet() {
       <Section>
         <div className="flex justify-between">
           <h3>Transações</h3>
-          <DateRangePicker
-            date={date}
-            setDate={setDate}
-          />
+          <div className="flex">
+            <DateRangePicker
+              date={date}
+              setDate={setDate}
+            />
+            {date?.from && date?.to && (
+              <Button
+                variant="link"
+                title="Limpar filtro de data"
+                onClick={() => setDate(undefined)}
+                className="pr-0"
+              >
+                <X className="text-destructive" />
+              </Button>
+            )}
+          </div>
         </div>
         <Tabs
           defaultValue="ALL"

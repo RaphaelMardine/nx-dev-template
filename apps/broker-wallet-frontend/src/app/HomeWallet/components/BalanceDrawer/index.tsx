@@ -101,7 +101,7 @@ export const BalanceDrawer = ({
                     </h6>
                   </div>
                   {balance?.availableBonus?.length > 0 ? (
-                    balance.availableBonus.map((bonus) => (
+                    balance.availableBonus?.map((bonus) => (
                       <div
                         key={bonus._id as string}
                         className="flex items-start justify-between w-full pr-2"
@@ -135,7 +135,7 @@ export const BalanceDrawer = ({
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-8 ">
                   {balance?.expiredBonus?.length > 0 ? (
-                    balance.expiredBonus.map((bonus) => (
+                    balance.expiredBonus?.map((bonus) => (
                       <div
                         key={bonus._id as string}
                         className="flex flex-col gap-2"

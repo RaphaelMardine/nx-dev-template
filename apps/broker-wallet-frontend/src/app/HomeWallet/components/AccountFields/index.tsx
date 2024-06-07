@@ -38,7 +38,11 @@ export const AccountFields = ({ form, disabled }: IAccountFields) => {
 
   return (
     <div className="flex flex-col max-h-screen gap-6 pb-20 overflow-y-auto">
-      <p className="text-xl font-bold">Preencha as informações bancárias</p>
+      {disabled ? (
+        <p className="text-xl font-bold">Confira as informações bancárias</p>
+      ) : (
+        <p className="text-xl font-bold">Preencha as informações bancárias</p>
+      )}
       <div className="flex w-full">
         <div className="w-full">
           <p className="text-sm font-bold ">Unidade</p>

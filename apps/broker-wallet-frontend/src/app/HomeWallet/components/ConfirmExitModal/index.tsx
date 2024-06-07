@@ -35,8 +35,8 @@ export const ConfirmExitModal = ({
             <TriangleAlert /> Tem certeza disto?
           </DialogTitle>
           <DialogDescription className="pb-8">
-            Você possui informações preenchidas para realizar o saque, caso saia
-            do fluxo perderá essas informações!
+            Você possui informações preenchidas para realizar o depósito, caso
+            saia do fluxo perderá essas informações!
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>

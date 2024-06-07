@@ -37,7 +37,7 @@ export const WalletHeader = ({ balance }: { balance: BalanceWallet }) => {
   const dots = Array.from({ length: 9 }, (_, i) => i);
 
   return (
-    <div className="flex justify-between align-top">
+    <div className="flex flex-col justify-center align-top md:justify-between md:flex-row">
       <div className="flex flex-col max-w-md gap-4">
         <h3>Carteira</h3>
         <p>
@@ -93,7 +93,7 @@ export const WalletHeader = ({ balance }: { balance: BalanceWallet }) => {
         <div className="p-2 group">
           <div
             onClick={() => setBalanceDrawerOpen(true)}
-            className="p-4 pl-10 rounded cursor-pointer group-hover:scale-105 group-hover:bg-gray-300"
+            className="p-4 rounded cursor-pointer md:pl-10 group-hover:scale-105 group-hover:bg-gray-300"
           >
             <Progress
               value={percentageAvailable}
@@ -104,7 +104,7 @@ export const WalletHeader = ({ balance }: { balance: BalanceWallet }) => {
               <div className="flex justify-between">
                 <div className="flex flex-col gap-2">
                   <h6>Saldo total:</h6>
-                  <h4>{convertCentsToBRL(totalBalance)}</h4>
+                  <h4>{convertCentsToBRL(totalBalance || 0)}</h4>
                 </div>
                 <div>
                   <Button
@@ -134,7 +134,7 @@ export const WalletHeader = ({ balance }: { balance: BalanceWallet }) => {
                       />
                     ))}
                   </span>
-                  <span>{convertCentsToBRL(balance?.available)}</span>
+                  <span>{convertCentsToBRL(balance?.available || 0)}</span>
                 </div>
                 <div className="flex justify-between gap-2">
                   <span className="flex align-bottom">
@@ -151,7 +151,7 @@ export const WalletHeader = ({ balance }: { balance: BalanceWallet }) => {
                       />
                     ))}
                   </span>
-                  <span>{convertCentsToBRL(balance?.bonusAmount)}</span>
+                  <span>{convertCentsToBRL(balance?.bonusAmount || 0)}</span>
                 </div>
               </div>
             </div>
