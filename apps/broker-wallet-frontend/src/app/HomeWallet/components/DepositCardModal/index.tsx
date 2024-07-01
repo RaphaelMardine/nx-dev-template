@@ -159,7 +159,14 @@ export const DepositCardModal = ({
         nextStepAction[stepSelect].action();
       }
     },
-    [getToken, isVerified?.verified, schema, stepSelect, toast]
+    [
+      getToken,
+      handleSendBankAccount,
+      isVerified?.verified,
+      schema,
+      stepSelect,
+      toast,
+    ]
   );
 
   const calculateTotalValue = useCallback(() => {

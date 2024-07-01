@@ -15,7 +15,6 @@ import { Form } from '@v4company/ui-components/components/ui/form';
 import { bankSlipOrPixSchema } from '../../constants';
 import { useQuery } from '@tanstack/react-query';
 import { Account } from './Account';
-import { useAuth } from '@v4company/contexts';
 
 interface DepositModalProps {
   onClose: () => void;
@@ -48,8 +47,6 @@ export const DepositModal = ({
   const schema = bankSlipOrPixSchema[stepSelect]?.schema;
 
   const { toast } = useToast();
-
-  const { user } = useAuth();
 
   const { data: isVerified } = useQuery({
     queryKey: ['verify-account'],

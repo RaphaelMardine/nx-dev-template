@@ -6,11 +6,14 @@
     "dev": "npx nx dev mktlab-frontend",
     "dev:mktlab-frontend": "npx nx dev mktlab-frontend",
     "dev:broker-wallet-frontend": "npx nx dev broker-wallet-frontend",
+    "dev:leadbroker-frontend": "npx nx dev leadbroker-frontend",
     "build:mktlab-frontend": "npx nx build mktlab-frontend",
     "build:broker-wallet-frontend": "npx nx build broker-wallet-frontend",
+    "build:leadbroker-frontend": "npx nx build leadbroker-frontend",
     "format": "prettier --write .",
     "lint:mktlab-frontend": "npx nx run mktlab-frontend:lint",
-    "lint:broker-wallet-frontend": "npx nx run broker-wallet-frontend:lint"
+    "lint:broker-wallet-frontend": "npx nx run broker-wallet-frontend:lint",
+    "lint:leadbroker-frontend": "npx nx run leadbroker-frontend:lint"
   },
   "engines": {
     "node": ">=20"

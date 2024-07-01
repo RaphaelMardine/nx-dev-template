@@ -141,7 +141,7 @@ export const WithdrawModal = ({
     if (withdrawDetails.data) {
       setStepSelect('infoWithdraw');
     }
-  }, [form, onClose]);
+  }, [form]);
 
   const steps: Record<string, { component: JSX.Element }> = {
     amount: {

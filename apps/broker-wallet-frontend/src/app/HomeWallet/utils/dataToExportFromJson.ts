@@ -1,7 +1,7 @@
-import { TransactionsResponse } from 'apps/broker-wallet-frontend/src/common/types';
 import { badge } from '../constants';
 import { convertCentsToBRL, formatDate } from '@v4company/utils';
 import { getTypeTransaction } from './getTypeTransaction';
+import { TransactionsResponse } from '../../../common/types';
 
 export function dataToExportFromJson(data: TransactionsResponse[] | undefined) {
   const dataToSend = data?.map((item: TransactionsResponse) => {
