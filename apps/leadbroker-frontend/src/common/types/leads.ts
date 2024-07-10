@@ -23,7 +23,8 @@ export interface Lead {
   campaign: string;
   segment: string;
   name: string;
-  tel?: string;
+  tel: string;
+  cnpj?: string;
   email: string;
   urgencyToStart?: string;
   companyPosition?: string;
@@ -62,7 +63,29 @@ export interface Historic {
   status: string;
   updatedAt: Date;
   createdAt?: Date;
-  body?: string;
+  time?: Date;
+  body: string;
+}
+
+interface Location {
+  city: string;
+  latitude: number;
+  longitude: number;
+  state: string;
+}
+
+export enum Steps {
+  'LEAD_PURCHASED' = 'LEAD_PURCHASED',
+  'IN_PROSPECTING' = 'IN_PROSPECTING',
+  'MEETING_SCHEDULED' = 'MEETING_SCHEDULED',
+  'CONTRACT_SENT' = 'CONTRACT_SENT',
+  'ACTIVE_CONTRACT' = 'ACTIVE_CONTRACT',
+  'LOST_LEAD' = 'LOST_LEAD',
+  'RETURN_MEETING' = 'RETURN_MEETING',
+  'WAITING' = 'WAITING',
+  'UNDER_ANALYSIS' = 'UNDER_ANALYSIS',
+  'REJECTED' = 'REJECTED',
+  'APPROVED' = 'APPROVED',
 }
 
 export interface MyLeadResponse {
@@ -83,7 +106,7 @@ export interface MyLeadResponse {
   expiresAt: Date;
   salesforceId?: string;
   updatedAt: Date;
-  steps?: string;
+  steps?: Steps;
   __v: number;
 }
 

@@ -59,13 +59,14 @@ export const LeadsTable = ({
   const data = getData(leads);
   const router = useRouter();
   const columns = tab === 'LEADS_PURCHASED' ? columnsLeads : columnsRefunds;
+  const isRefund = tab === 'LEADS_PURCHASED' ? '' : '/refund';
 
   return (
     <div className="w-full py-4 mx-auto">
       <DataTable
         columns={columns}
         data={data}
-        handleRowClick={(row) => router.push(`/my-leads/${row.id}`)}
+        handleRowClick={(row) => router.push(`/my-leads${isRefund}/${row.id}`)}
         pageCount={pageCount}
         pagination={pagination}
         setPagination={setPagination}

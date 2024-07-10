@@ -13,6 +13,11 @@ export const leadBrokerApi = axios.create({
   headers,
 });
 
+export const fileApi = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_STORAGE_URL,
+  headers,
+});
+
 export const iuguApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_IUGU_API,
   headers: { accept: 'application/json', 'content-type': 'application/json' },

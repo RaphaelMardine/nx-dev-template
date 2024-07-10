@@ -1,13 +1,16 @@
 'use client';
 
 import { Container, Section } from '@v4company/ui-components';
-import BreadcrumbMyLeads from './components/breadcrumb';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMyLeads } from '../../common/services';
 import { SortingState } from '@tanstack/react-table';
-import { DownloadCsv, LeadsTable } from './components';
-import TabsMyLeads from './components/tabs';
+import {
+  BreadcrumbMyLeads,
+  DownloadCsv,
+  LeadsTable,
+  TabsMyLeads,
+} from './components';
 
 export default function MyLeads() {
   const [tab, setTab] = useState<'LEADS_PURCHASED' | 'LEADS_REFUNDED'>(

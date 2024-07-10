@@ -5,7 +5,7 @@ interface TabsMyLeadsProps {
   setTab: Dispatch<SetStateAction<'LEADS_PURCHASED' | 'LEADS_REFUNDED'>>;
 }
 
-export default function TabsMyLeads({ setTab }: TabsMyLeadsProps) {
+export function TabsMyLeads({ setTab }: TabsMyLeadsProps) {
   return (
     <Tabs
       defaultValue="LEADS_PURCHASED"

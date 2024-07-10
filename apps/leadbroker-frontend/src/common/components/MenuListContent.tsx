@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { useAuth } from '@v4company/contexts';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   ArrowLeftRight,
   BarChart4,
@@ -18,9 +18,10 @@ import { ScrollArea } from '@v4company/ui-components';
 export const MenuListContent = () => {
   const { user } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
 
   const mktLabUrl = process.env.NEXT_PUBLIC_MKTLAB_URL || '';
-  const leadbrokerUrl = process.env.NEXT_PUBLIC_LEADBROKER_URL || '';
+  const walletUrl = process.env.NEXT_PUBLIC_BROKERWALLET_URL || '';
   const meetingbrokerUrl = process.env.NEXT_PUBLIC_MEETINGBROKER_URL || '';
   const transitionUrl = process.env.NEXT_PUBLIC_TRANSITION_URL || '';
   const brokerManagerUrl = process.env.NEXT_PUBLIC_BROKERMANAGER_URL || '';
@@ -35,8 +36,10 @@ export const MenuListContent = () => {
             </h3>
             <ul className="flex flex-col gap-4 py-1 *:flex *:gap-2 *:hover:cursor-pointer *:transition duration-300 ease-in-out">
               <li
-                className="flex items-center gap-2 py-2 pl-4 hover:scale-105"
-                onClick={() => (window.location.href = leadbrokerUrl)}
+                className={`flex items-center gap-2 py-2 pl-4 hover:scale-105 ${
+                  pathname === '/' && 'bg-gray-700 rounded-lg'
+                }`}
+                onClick={() => router.push('/')}
               >
                 <DollarSign
                   size={16}
@@ -45,10 +48,10 @@ export const MenuListContent = () => {
                 <span className="text-base text-white">Lead Broker</span>
               </li>
               <li
-                className="flex items-center gap-2 py-2 pl-4 hover:scale-105"
-                onClick={() =>
-                  (window.location.href = `${leadbrokerUrl}/meus-leads`)
-                }
+                className={`flex items-center gap-2 py-2 pl-4 hover:scale-105 ${
+                  pathname.includes('my-leads') && 'bg-gray-700 rounded-lg'
+                }`}
+                onClick={() => router.push('/my-leads')}
               >
                 <UserCheck
                   size={16}
@@ -144,8 +147,8 @@ export const MenuListContent = () => {
                 <span className="text-base text-white">Dashboard</span>
               </li>
               <li
-                className="flex items-center gap-2 py-2 pl-4 bg-gray-700 rounded-lg hover:scale-105"
-                onClick={() => router.push('/')}
+                className="flex items-center gap-2 py-2 pl-4 hover:scale-105"
+                onClick={() => (window.location.href = walletUrl)}
               >
                 <Wallet
                   size={16}
@@ -171,7 +174,7 @@ export const MenuListContent = () => {
         <div className="flex items-center justify-center gap-4 mb-3.5 w-full h-20 px-2 bg-primary-darkgray rounded-lg">
           <Avatar className="w-12 h-12">
             <AvatarImage
-              className="rounded-full h-full w-full"
+              className="w-full h-full rounded-full"
               src={user.picture || 'https://github.com/shadcn.png'}
             />
             <AvatarFallback>CN</AvatarFallback>
