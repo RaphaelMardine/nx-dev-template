@@ -20,7 +20,6 @@ export const MenuListContent = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const mktLabUrl = process.env.NEXT_PUBLIC_MKTLAB_URL || '';
   const walletUrl = process.env.NEXT_PUBLIC_BROKERWALLET_URL || '';
   const meetingbrokerUrl = process.env.NEXT_PUBLIC_MEETINGBROKER_URL || '';
   const transitionUrl = process.env.NEXT_PUBLIC_TRANSITION_URL || '';
@@ -137,8 +136,10 @@ export const MenuListContent = () => {
             </h3>
             <ul className="flex flex-col gap-4 py-1 *:flex *:gap-2 *:hover:cursor-pointer *:transition duration-300 ease-in-out">
               <li
-                className="flex items-center gap-2 py-2 pl-4 hover:scale-105"
-                onClick={() => (window.location.href = mktLabUrl)}
+                className={`flex items-center gap-2 py-2 pl-4 hover:scale-105 ${
+                  pathname === '/dashboard' && 'bg-gray-700 rounded-lg'
+                }`}
+                onClick={() => router.push('/dashboard')}
               >
                 <BarChart4
                   size={16}

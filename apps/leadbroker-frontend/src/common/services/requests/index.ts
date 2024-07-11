@@ -4,3 +4,4 @@ export * from './updateLeads';
 export * from './getSalesManager';
 export * from './sendFiles';
 export * from './requestRefund';
+export * from './getDashboardUrl';
