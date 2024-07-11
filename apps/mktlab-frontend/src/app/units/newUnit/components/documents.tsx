@@ -5,6 +5,7 @@ import {
   FormItem,
   FormLabel,
   Input,
+  MoneyInput,
   Select,
   SelectContent,
   SelectItem,
@@ -16,6 +17,7 @@ import { SubmitHandler, UseFormReturn } from 'react-hook-form';
 import { IDocumentsFormCreation } from '../../../common/types/hooks-forms';
 import { NextStepContainer } from './nextStepContainer';
 import { PeriodPicker } from '../../../common/components/PeriodPicker';
+import { convertCentsToBRL, convertValueToBRL } from '@v4company/utils';
 
 export const Documents = ({
   form,
@@ -40,8 +42,6 @@ export const Documents = ({
     },
     []
   );
-
-  console.log(form?.formState);
 
   return (
     <Form {...form}>
@@ -79,19 +79,12 @@ export const Documents = ({
                   ></FormField>
                 </GapInput>
                 <GapInput>
-                  <FormField
-                    control={form.control}
-                    name="taxFranchiseTraining"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Taxa de treinamento de franquia</FormLabel>
-                        <Input
-                          type="number"
-                          placeholder="EX: R$ 1.000,00"
-                          {...field}
-                        />
-                      </FormItem>
-                    )}
+                  <MoneyInput 
+                  form={form}
+                  decimal={2}
+                  label='Taxa de treinamento de franquia'
+                  name='taxFranchiseTraining'
+                  placeholder='EX: R$ 1.000,00'
                   />
                 </GapInput>
                 <GapInput>

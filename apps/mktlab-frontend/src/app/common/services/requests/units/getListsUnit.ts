@@ -1,5 +1,5 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
-import { lambdaApi } from '../api';
+import { lambdaApi } from '../../api';
 
 export interface ResultUnitList {
   result: IUnitList[];

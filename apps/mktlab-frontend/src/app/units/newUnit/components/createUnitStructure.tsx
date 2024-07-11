@@ -37,7 +37,7 @@ export const CreateUnitStructure = ({
           className="h-4"
         />
       </div>
-      {currentStep.content}
+      {currentStep?.content}
     </div>
   );
 };

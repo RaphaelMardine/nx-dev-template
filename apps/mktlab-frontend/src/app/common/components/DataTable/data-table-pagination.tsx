@@ -29,7 +29,7 @@ export function DataTablePagination<TData>({
       <div className="flex flex-col-reverse items-center justify-between w-full gap-4 sm:flex-row sm:gap-6 lg:gap-8">
         <div className="flex items-center w-full space-x-2">
           <p className="text-sm font-medium whitespace-nowrap">
-            Itens por página{' '}
+            Itens por página
           </p>
           <Select
             value={`${table.getState().pagination.pageSize}`}
@@ -51,7 +51,6 @@ export function DataTablePagination<TData>({
               ))}
             </SelectContent>
           </Select>
-          <p className="">1 - 10 de 20 itens</p>
         </div>
         <div className="flex items-center justify-center w-full gap-6 text-sm font-medium">
           <Button

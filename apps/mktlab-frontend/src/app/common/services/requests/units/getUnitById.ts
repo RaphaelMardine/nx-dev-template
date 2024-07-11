@@ -1,7 +1,7 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
-import { lambdaApi } from '../api';
+import { lambdaApi } from '../../api';
 
-interface IGetUnitResponse {
+interface IGetUnitResponse  {
   id: string;
   cofId: string;
   companyId: string;
@@ -19,7 +19,7 @@ interface IGetUnitResponse {
 }
 
 export function UseQueryUnitById(unitId: string | undefined): UseQueryResult<{
-  data: any;
+  data: IGetUnitResponse;
 }> {
   return useQuery({
     queryKey: ['unitById', unitId],

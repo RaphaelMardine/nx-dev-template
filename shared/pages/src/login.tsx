@@ -21,7 +21,7 @@ export function Login() {
   };
 
   const handleLoginFailed = () => {
-    console.log('Login failed');
+    console.error('Login failed');
   };
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export function Login() {
 
   return (
     <div className=" flex w-full h-[100vh]">
-      <div className="flex flex-col justify-center items-center h-full w-5/12 gap-8 p-8">
+      <div className="flex flex-col items-center justify-center w-5/12 h-full gap-8 p-8">
         <Image
           src={Logo}
           alt="logo"
@@ -49,7 +49,7 @@ export function Login() {
         <p>{errorMessage} </p>
       </div>
       <Image
-        className="w-7/12 h-full object-cover"
+        className="object-cover w-7/12 h-full"
         src={Background}
         alt="background"
       />

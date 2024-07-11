@@ -16,7 +16,7 @@ import React, { useCallback } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { IDeactivateUnitReq, updateUnit } from '../../common/services/requests/units/updateUnit';
 
-const UnitRowActions = ({
+const CustomersRowActions = ({
   unitId,
   status,
   unit
@@ -64,13 +64,13 @@ const UnitRowActions = ({
           disabled
           onClick={() => router.push(`/units/editUnit/${unitId}`)}
         >
-          Editar unidade
+          Editar cliente
         </DropdownMenuItem>
         {status === 'ACTIVE' && (
           <DropdownMenuItem
             onClick={() => onSubmit(unit)}
           >
-            Desativar unidade
+            Desativar cliente
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>
@@ -78,4 +78,4 @@ const UnitRowActions = ({
   );
 };
 
-export default UnitRowActions;
+export default CustomersRowActions;

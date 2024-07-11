@@ -1,23 +1,20 @@
 'use client';
 
-import * as React from 'react';
-
-
 import { DataTable } from '../../common/components/DataTable/data-table';
 import { useDataTable } from '../../common/hooks/useDataTable';
-import { useState } from 'react';
-import { GetColumnsUnit } from './unitTableColumns';
-import { IUnitList } from '../../common/services/requests/units/getListsUnit';
+import { useEffect, useMemo, useState } from 'react';
+import { GetCustomersColumn } from './customerTableColumns';
+import { ICustomersList } from '../../common/services/requests/customers/getCustomersByFranchiseId';
 
-export function UnitTable({ data }: { data: IUnitList[] }) {
+export function CustomersTable({ data }: { data: ICustomersList[] }) {
   const [pageCount, setPageCount] = useState(1); 
 
-  React.useEffect(() => {
+  useEffect(() => {
     setPageCount(Math.ceil(data.length / 10));
 
   }, [data]);
 
-  const columns = React.useMemo(() => GetColumnsUnit(), []);
+  const columns = useMemo(() => GetCustomersColumn(), []);
 
   const { table } = useDataTable({
     data,

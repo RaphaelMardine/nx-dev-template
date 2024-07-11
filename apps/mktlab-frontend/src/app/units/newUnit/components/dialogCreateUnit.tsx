@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@v4company/ui-components';
+import { useRouter } from 'next/navigation';
 
 export const DialogCreateUnit = ({
   openDialog,
@@ -16,6 +17,8 @@ export const DialogCreateUnit = ({
   openDialog: boolean;
   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const router = useRouter()
+
   return (
     <Dialog
       open={openDialog}
@@ -38,7 +41,7 @@ export const DialogCreateUnit = ({
             <Button
               type="button"
               variant="destructive"
-              onClick={() => setOpenDialog(false)}
+              onClick={() => router.push('/units')}
             >
               Fechar janela
             </Button>

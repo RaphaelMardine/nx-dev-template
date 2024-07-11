@@ -10,7 +10,6 @@ import { Form } from '@v4company/ui-components';
 import { useRouter as useNavigation } from 'next/navigation';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
-import { getUnitById } from '../../../common/services/requests/getUnitById';
 import {
   Dialog,
   DialogContent,
@@ -18,10 +17,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@v4company/ui-components';
-import {
-  IDeactivateUnitReq,
-  updateUnit,
-} from '../../../common/services/requests/updateUnit';
+import { getUnitById } from '../../../common/services/requests/units/getUnitById';
+import { IDeactivateUnitReq, updateUnit } from '../../../common/services/requests/units/updateUnit';
+
 
 const unitDeactivationSchema = z.object({
   description: z
@@ -56,7 +54,7 @@ export default function DeactivateUnit() {
   });
 
   const onSubmit: SubmitHandler<IUnitDeactivation> = useCallback(
-    async (data: IUnitDeactivation) => {
+    async () => {
       try {
         setLoading(true);
         const unitId = params.id as string;
@@ -81,7 +79,7 @@ export default function DeactivateUnit() {
         setLoading(false);
       }
     },
-    []
+    [params.id]
   );
 
   useEffect(() => {
@@ -133,11 +131,11 @@ export default function DeactivateUnit() {
                 <DialogContent>
                   <DialogHeader>
                     {deactivationComplete ? (
-                      <DialogTitle className="text-3xl text-center pt-4">
+                      <DialogTitle className="pt-4 text-3xl text-center">
                         Unidade desativada com sucesso
                       </DialogTitle>
                     ) : (
-                      <DialogTitle className="text-3xl text-center pt-4">
+                      <DialogTitle className="pt-4 text-3xl text-center">
                         Você tem certeza que deseja desativar esta unidade?
                       </DialogTitle>
                     )}

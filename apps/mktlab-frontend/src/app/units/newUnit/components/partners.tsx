@@ -72,9 +72,6 @@ export const Partners = ({
     []
   );
 
-  console.log(form?.formState?.errors, 'error partner');
-  console.log(form, 'form partner');
-
   return (
     <Form {...form}>
       <form onSubmit={form?.handleSubmit(onSubmit)}>

@@ -6,14 +6,15 @@ import {
   TabsList,
   TabsTrigger,
 } from '@v4company/ui-components';
-import { BreadcrumbUnits } from './components/breadcrumbUnits';
-import { CardsUnit } from './components/cardsUnit';
+import { BreadcrumbCustomers } from '../components/breadcrumbCustomers';
+import { CardsCustomers } from '../components/cardsCustomers';
 import { Download } from 'lucide-react';
-import { UnitTable } from './components/unitTable';
 import { ReactNode, useState } from 'react';
-import { ButtonCreateUnit } from './components/buttonCreateUnit';
-import SearchBar from '../common/components/SearchBar';
-import { UseQueryUnitList } from '../common/services/requests/units/getListsUnit';
+import SearchBar from '../../common/components/SearchBar';
+import { UseQueryUnitList } from '../../common/services/requests/units/getListsUnit';
+import { CustomersTable } from '../components/customersTable';
+import { UseQueryCustomersList } from '../../common/services/requests/customers/getCustomersByFranchiseId';
+import { useParams } from 'next/navigation';
 
 const Container = ({ children }: { children: ReactNode }) => (
   <div className="w-full p-5 bg-white border border-solid h-max border-color-gray-default">
@@ -25,41 +26,44 @@ const FlexBox = ({ children }: { children: ReactNode }) => (
   <div className="flex gap-10 ">{children}</div>
 );
 
-export default function Unit() {
-  const [active, setActive] = useState(true);
-  const [name, setName] = useState('');
-  const [page, setPage] = useState(1);
+export default function Customers() {
+  const { id } = useParams()
 
-  const { data } = UseQueryUnitList(page, name, active);
+  const { data } = UseQueryCustomersList(1, id as string);
 
-  const unitsActive = data?.data?.result.filter(
+  const customersActive = data?.data?.result.filter(
     (unit) => unit.status === 'ACTIVE'
   );
-  const unitsInactive = data?.data?.result.filter(
+  const customersInactive = data?.data?.result.filter(
     (unit) => unit.status === 'INACTIVE'
   );
 
   return (
     <div className="min-h-screen px-8 pt-20 bg-center first-line:bg-center text-ellipsis">
-      <BreadcrumbUnits />
+      <BreadcrumbCustomers />
       <div className="flex justify-between py-8">
         <h1 className="text-4xl font-bold">Visão geral</h1>
-        <ButtonCreateUnit />
+        <Button
+          className="font-bold rounded-xl"
+          disabled
+        >
+          Novo cliente
+        </Button>
       </div>
       <div className="flex flex-col gap-8">
         <Container>
           <FlexBox>
-            <CardsUnit
-              quantity={unitsActive?.length || 0}
-              title="Franquias ativas"
+            <CardsCustomers
+              quantity={customersActive?.length || 0}
+              title="Clientes ativos"
             />
-            <CardsUnit
-              quantity={unitsInactive?.length || 0}
-              title="Franquias inativadas"
+            <CardsCustomers
+              quantity={customersInactive?.length || 0}
+              title="Clientes inativados"
             />
-            <CardsUnit
-              title="Novas franquias"
-              quantity={unitsActive?.length || 0}
+            <CardsCustomers
+              title="Novos clientes"
+              quantity={customersActive?.length || 0}
               contentBadge={`+ 100%`}
               typeBadge="success"
             />
@@ -68,7 +72,7 @@ export default function Unit() {
         <Container>
           <Tabs defaultValue="active">
             <div className="flex justify-between">
-              <h2 className="font-bold text-2 xl">Gerenciamento de unidades</h2>
+              <h2 className="font-bold text-2 xl">Gerenciamento de clientes</h2>
               <div className="flex">
                 <Button
                   disabled
@@ -84,13 +88,11 @@ export default function Unit() {
                 <TabsList>
                   <TabsTrigger
                     value="active"
-                    onClick={() => setActive(true)}
                   >
                     Ativas
                   </TabsTrigger>
                   <TabsTrigger
                     value="inactive"
-                    onClick={() => setActive(false)}
                   >
                     Inativas
                   </TabsTrigger>
@@ -101,14 +103,13 @@ export default function Unit() {
               <SearchBar
                 placeholder="Busque por unidade"
                 className="pr-4 w-80 pl-9"
-                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <TabsContent value="active">
-              {data?.data && <UnitTable data={data?.data?.result} />}
+              {data?.data && <CustomersTable data={data?.data?.result} />}
             </TabsContent>
             <TabsContent value="inactive">
-              {data?.data && <UnitTable data={data?.data?.result} />}
+              {data?.data && <CustomersTable data={data?.data?.result} />}
             </TabsContent>
           </Tabs>
         </Container>

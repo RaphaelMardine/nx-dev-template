@@ -1,4 +1,4 @@
-import { lambdaApi } from '../api';
+import { lambdaApi } from "../../api";
 
 interface IResponseCreateUnit {
   id: string;
@@ -17,11 +17,12 @@ interface IResponseCreateUnit {
   franchiseTrainingFee: number;
 }
 
-export async function createUnit(
-  DataToSend: any
+export async function editUnit(
+  DataToSend: any,
+  unitId: string
 ): Promise<IResponseCreateUnit | undefined> {
   try {
-    const response = await lambdaApi.post('franchise/create', DataToSend);
+    const response = await lambdaApi.put(`franchise/${unitId}`, DataToSend);
     return response.data;
   } catch (err) {
     console.error(err);

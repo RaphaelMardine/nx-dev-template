@@ -27,13 +27,11 @@ const AuthProvider = ({ children }: any) => {
     });
     const { token, user: requestUser, unit } = response.data;
     if (!requestUser) {
-      console.log('Erro 1');
       setLoadingUser(false);
       return;
     }
 
     if (!unit?._id) {
-      console.log('Erro 2');
       setLoadingUser(false);
       return;
     }
@@ -56,7 +54,6 @@ const AuthProvider = ({ children }: any) => {
 
   async function checkUser() {
     const { 'v4company.token': token } = parseCookies();
-    console.log('CHECKED!');
 
     if (!token) {
       setLoadingUser(false);

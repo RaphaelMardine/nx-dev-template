@@ -1,6 +1,6 @@
-import { lambdaApi } from '../api';
+import { lambdaApi } from "../../api";
 
-interface IResponseCreateUnit {
+interface IResReqDeactivateUnit {
   id: string;
   cofId: string;
   companyId: string;
@@ -17,12 +17,17 @@ interface IResponseCreateUnit {
   franchiseTrainingFee: number;
 }
 
-export async function editUnit(
-  DataToSend: any,
-  unitId: string
-): Promise<IResponseCreateUnit | undefined> {
+export interface IDeactivateUnitReq {
+  id: string;
+  cofId: string;
+  status: string;
+}
+
+export async function updateUnit(
+  DataToSend: IDeactivateUnitReq
+): Promise<IResReqDeactivateUnit | undefined> {
   try {
-    const response = await lambdaApi.put(`franchise/${unitId}`, DataToSend);
+    const response = await lambdaApi.put('franchise/update', DataToSend);
     return response.data;
   } catch (err) {
     console.error(err);

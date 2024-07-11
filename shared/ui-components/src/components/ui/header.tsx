@@ -100,60 +100,79 @@ const HeaderProductsMenu = () => {
             />
             <p>Visão geral</p>
           </li>
-          <li className="hover:scale-105">
+          <li
+            className="hover:scale-105"
+            onClick={() => router.push('https://mktlab.app/clients')}
+          >
             <Briefcase
               size={32}
               color="#ffffff"
             />
-            <a href="https://mktlab.app/clientes">Clientes</a>
+            <p>Clientes</p>
           </li>
-          <li className="hover:scale-105">
+          <li
+            className="hover:scale-105"
+            onClick={() => router.push('https://mktlab.app/unidades')}
+          >
             <UsersRound
               size={32}
               color="#ffffff"
             />
-            <a href="https://mktlab.app/unidades">Investidores</a>
+            <p>Investidores</p>
           </li>
         </ul>
         <h3 className="mt-8 text-sm font-bold text-white">Produtos V4</h3>
         <Separator className="bg-primary-darkgray"></Separator>
         <ul className="flex flex-wrap gap-y-4 *:text-white *:text-sm *:p-2 *:text-center *:flex *:flex-col *:w-1/3 *:h-24 *:items-center *:justify-center *:gap-2.5 *:hover:cursor-pointer *:transition duration-300 ease-in-out">
-          <li className="hover:scale-105">
+          <li
+            className="hover:scale-105"
+            onClick={() => router.push('https://meetingbroker.mktlab.app/')}
+          >
             <CircleDollarSign
               size={32}
               color="#ffffff"
             />
-            <a href="https://leadbroker.mktlab.app/">Broker</a>
+            <p>Broker</p>
           </li>
-          <li className="hover:scale-105">
+          <li
+            className="hover:scale-105"
+            onClick={() => router.push('https://mktlab.app/clientes/mediahub')}
+          >
             <LayoutGrid
               size={32}
               color="#ffffff"
             />
-            <a href="https://mktlab.app/clientes/mediahub">MediaHub</a>
+            <p>MediaHub</p>
           </li>
-          <li className="hover:scale-105">
+          <li
+            className="hover:scale-105"
+            onClick={() => router.push('https://v4pay.mktlab.app/')}
+          >
             <QrCode
               size={32}
               color="#ffffff"
             />
-            <a href="https://v4pay.mktlab.app/payments/managementbilling">
-              V4 Pay
-            </a>
+            <p>V4 Pay</p>
           </li>
-          <li className="hover:scale-105">
+          <li
+            className="hover:scale-105"
+            onClick={() => router.push('https://mktlab.app/dashboards')}
+          >
             <BarChart2
               size={32}
               color="#ffffff"
             />
-            <a href="https://mktlab.app/dashboards">Central de Dashboards</a>
+            <p>Central de Dashboards</p>
           </li>
-          <li className="hover:scale-105">
+          <li
+            className="hover:scale-105"
+            onClick={() => router.push('https://laboratoriodomarketing.com/')}
+          >
             <Landmark
               size={32}
               color="#ffffff"
             />
-            <a href="https://laboratoriodomarketing.com/">Lab Financeiro</a>
+            <p>Lab Financeiro</p>
           </li>
         </ul>
       </PopoverContent>
