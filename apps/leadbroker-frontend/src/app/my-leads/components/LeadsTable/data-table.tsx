@@ -116,7 +116,7 @@ export function DataTable<TData, TValue>({
                 >
                   {row?.getVisibleCells()?.map((cell) => (
                     <TableCell
-                      width={'25%'}
+                      className="px-6"
                       key={cell.id}
                     >
                       {flexRender(

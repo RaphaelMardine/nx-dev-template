@@ -45,6 +45,14 @@ export function AddFiles({ files, setFiles }: AddFilesProps) {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop(acceptedFiles, fileRejections) {
+      if (acceptedFiles.length + files.length > 5) {
+        toast({
+          title: 'Erro ao adicionar arquivo',
+          description: 'O limite máximo de arquivos é 5',
+          variant: 'destructive',
+        });
+        return;
+      }
       if (fileRejections.length > 0) {
         fileRejections.map((file) => {
           toast({

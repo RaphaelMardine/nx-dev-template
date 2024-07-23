@@ -4,13 +4,19 @@ export const badge: Record<
   string,
   {
     label: string;
-    variant: 'default' | 'secondary' | 'destructive' | 'success';
+    variant:
+      | 'default'
+      | 'secondary'
+      | 'destructive'
+      | 'success'
+      | 'warning'
+      | 'info';
     icon?: JSX.Element;
   }
 > = {
   LEAD_PURCHASED: {
     label: 'Lead comprado',
-    variant: 'secondary',
+    variant: 'warning',
   },
   IN_PROSPECTING: {
     label: 'Lead em prospecção',
@@ -18,13 +24,13 @@ export const badge: Record<
     icon: <CircleCheckBig size={12} />,
   },
   MEETING_SCHEDULED: {
-    label: 'Reunião agendada',
-    variant: 'default',
+    label: 'Reunião marcada',
+    variant: 'info',
     icon: <TriangleAlert size={12} />,
   },
   RETURN_MEETING: {
     label: 'Reunião remarcada',
-    variant: 'default',
+    variant: 'info',
     icon: <TriangleAlert size={12} />,
   },
   CONTRACT_SENT: {
@@ -50,7 +56,7 @@ export const badge: Record<
   },
   UNDER_ANALYSIS: {
     label: 'Em análise',
-    variant: 'secondary',
+    variant: 'warning',
     icon: <TriangleAlert size={12} />,
   },
   REJECTED: {

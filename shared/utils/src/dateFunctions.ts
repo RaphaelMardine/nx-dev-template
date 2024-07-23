@@ -1,3 +1,4 @@
+import { differenceInDays } from 'date-fns';
 import { format } from 'date-fns/format';
 import { ptBR } from 'date-fns/locale/pt-BR';
 
@@ -28,4 +29,9 @@ export const formatTimeSeconds = (date: Date) => {
   }).toString();
 
   return formatedTime;
+};
+
+export const distanceInDays = (date: Date) => {
+  const formatedDate = differenceInDays(new Date(), new Date(date));
+  return formatedDate;
 };

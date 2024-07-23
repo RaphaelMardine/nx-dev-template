@@ -13,7 +13,7 @@ export function BreadcrumbMyLeads() {
     <Breadcrumb className="pt-8 font-sans">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink path="/">Lead Broker</BreadcrumbLink>
+          <BreadcrumbLink path="/home">Lead Broker</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
           <Slash />

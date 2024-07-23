@@ -50,12 +50,16 @@ const schema = z.object({
   reason: z.string({
     required_error: 'Selecione o motivo',
   }),
-  description: z.string({
-    required_error: 'Insira a descrição',
-  }),
-  phone: z.string({
-    required_error: 'Insira o telefone',
-  }),
+  description: z
+    .string({
+      required_error: 'Insira a descrição',
+    })
+    .min(10, 'A descrição deve ter no mínimo 5 caracteres'),
+  phone: z
+    .string({
+      required_error: 'Insira o telefone',
+    })
+    .min(15, 'Insira um telefone válido'),
 });
 
 interface IFormRefundRequest {
@@ -72,7 +76,7 @@ export function RequestRefund() {
   const [open, setOpen] = useState(false);
   const { lead } = useLead();
   const disabledRefund =
-    !(lead?.steps === 'IN_PROSPECTING' || lead?.steps === 'LEAD_PURCHASED') &&
+    (lead?.steps === 'IN_PROSPECTING' || lead?.steps === 'LEAD_PURCHASED') &&
     !lead?.refund?.status;
   const { toast } = useToast();
   const router = useRouter();
@@ -94,7 +98,7 @@ export function RequestRefund() {
     async (data) => {
       const body: IRefundData = {
         refundReason: data.reason,
-        automaticReject: false, //validar esse campo
+        automaticReject: false,
         refundValues: {
           depositAmount: lead?.winner?.realValue || 0,
           bonusAmount: lead?.winner?.bonus || 0,
@@ -141,7 +145,7 @@ export function RequestRefund() {
       onOpenChange={setOpen}
       modal
     >
-      {!disabledRefund && (
+      {disabledRefund && (
         <DialogTrigger>
           <Button
             variant="ghost"

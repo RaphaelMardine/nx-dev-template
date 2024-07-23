@@ -58,7 +58,7 @@ const HeaderProvider = ({
   const { user, signOut } = useContext(AuthContext);
 
   return (
-    <div>
+    <div className="h-full">
       {user?._id && (
         <Header
           user={user}

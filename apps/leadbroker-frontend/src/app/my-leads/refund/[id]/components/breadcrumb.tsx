@@ -15,19 +15,21 @@ export function BreadcrumbMyRefundsView() {
     <Breadcrumb className="pt-8 font-sans">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink path="/">Lead Broker</BreadcrumbLink>
+          <BreadcrumbLink path="/home">Lead Broker</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
           <Slash />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
-          <BreadcrumbLink path="/my-leads">Meus Leads</BreadcrumbLink>
+          <BreadcrumbLink path="/my-leads?tab=LEADS_PURCHASED">
+            Meus Leads
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
           <Slash />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
-          <BreadcrumbLink path="/my-leads">
+          <BreadcrumbLink path="/my-leads?tab=LEADS_REFUNDED">
             Solicitações de reembolso
           </BreadcrumbLink>
         </BreadcrumbItem>

@@ -37,7 +37,7 @@ const schema = z
   })
   .refine(
     (data) => {
-      if (data.lostReason === 'Outros') {
+      if (data.lostReason === 'Outros' && !data.description) {
         return false;
       }
       return true;
@@ -120,34 +120,6 @@ export function NotifyLossLead() {
     },
     [lead?._id, refetch, toast]
   );
-
-  // const handleUpdateStep = useCallback(async () => {
-  //   if (!lead?._id) return;
-  //   setLoading(true);
-
-  //   const response = await updateStep({ id: lead?._id, step: 'LOST_LEAD' });
-
-  //   setOpen(false);
-
-  //   if (response.error) {
-  //     toast({
-  //       title: 'Erro',
-  //       description: 'Erro ao atualizar etapa',
-  //       variant: 'destructive',
-  //     });
-
-  //     setLoading(false);
-  //     return;
-  //   }
-
-  //   await refetch();
-  //   toast({
-  //     title: 'Sucesso',
-  //     description: 'Estado atualizado com sucesso',
-  //   });
-
-  //   setLoading(false);
-  // }, [lead?._id, refetch, toast]);
 
   return (
     <Dialog

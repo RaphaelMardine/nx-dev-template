@@ -2,13 +2,14 @@ import { Tabs, TabsList, TabsTrigger } from '@v4company/ui-components';
 import { Dispatch, SetStateAction } from 'react';
 
 interface TabsMyLeadsProps {
+  tab: 'LEADS_PURCHASED' | 'LEADS_REFUNDED';
   setTab: Dispatch<SetStateAction<'LEADS_PURCHASED' | 'LEADS_REFUNDED'>>;
 }
 
-export function TabsMyLeads({ setTab }: TabsMyLeadsProps) {
+export function TabsMyLeads({ tab, setTab }: TabsMyLeadsProps) {
   return (
     <Tabs
-      defaultValue="LEADS_PURCHASED"
+      defaultValue={tab}
       className="w-full"
     >
       <TabsList>

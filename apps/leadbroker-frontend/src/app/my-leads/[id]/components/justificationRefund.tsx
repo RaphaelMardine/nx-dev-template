@@ -23,7 +23,7 @@ export function JustificationRefund() {
         </CollapsibleTrigger>
         <CollapsibleContent className="flex flex-col gap-2 px-10 pt-2 pb-6">
           <p className="font-bold">Descrição</p>
-          <p>{lead?.refund?.reason}</p>
+          <p>{lead?.refund?.description}</p>
         </CollapsibleContent>
       </Collapsible>
     )

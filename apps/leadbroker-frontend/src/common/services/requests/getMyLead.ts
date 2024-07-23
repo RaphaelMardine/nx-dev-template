@@ -1,5 +1,6 @@
 import { api } from '@v4company/services';
 import { MyLeadResponse } from '../../types';
+import { parseCookies } from 'nookies';
 
 export async function getMyLead(leadId: string) {
   const obj: {
@@ -7,7 +8,11 @@ export async function getMyLead(leadId: string) {
     data: MyLeadResponse;
   } = { error: null, data: {} as MyLeadResponse };
   try {
-    const response = await api.get(`/leads/${leadId}?won=true`);
+    const cookies = parseCookies(undefined);
+
+    const response = await api.get(`/leads/${leadId}?won=true`, {
+      headers: { Authorization: `Bearer ${cookies['v4company.token']}` },
+    });
 
     obj.data = response.data;
 
@@ -25,7 +30,11 @@ export async function getMyLeadRefund(leadId: string) {
     data: MyLeadResponse;
   } = { error: null, data: {} as MyLeadResponse };
   try {
-    const response = await api.get(`/refund-request/${leadId}`);
+    const cookies = parseCookies(undefined);
+
+    const response = await api.get(`/refund-request/${leadId}`, {
+      headers: { Authorization: `Bearer ${cookies['v4company.token']}` },
+    });
 
     obj.data = response.data;
 

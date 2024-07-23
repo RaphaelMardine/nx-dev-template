@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMyLeads } from '../../common/services';
 import { SortingState } from '@tanstack/react-table';
+import { useSearchParams } from 'next/navigation';
 import {
   BreadcrumbMyLeads,
   DownloadCsv,
@@ -13,8 +14,10 @@ import {
 } from './components';
 
 export default function MyLeads() {
+  const search = useSearchParams();
   const [tab, setTab] = useState<'LEADS_PURCHASED' | 'LEADS_REFUNDED'>(
-    'LEADS_PURCHASED'
+    (search.get('tab') as 'LEADS_PURCHASED' | 'LEADS_REFUNDED') ||
+      'LEADS_PURCHASED'
   );
   const [pagination, setPagination] = useState({
     pageIndex: 0,
@@ -41,7 +44,10 @@ export default function MyLeads() {
         <h3>Meus Leads</h3>
 
         <div className="flex justify-between">
-          <TabsMyLeads setTab={setTab} />
+          <TabsMyLeads
+            tab={tab}
+            setTab={setTab}
+          />
           <DownloadCsv data={myLeads?.data?.data || []} />
         </div>
         <LeadsTable
