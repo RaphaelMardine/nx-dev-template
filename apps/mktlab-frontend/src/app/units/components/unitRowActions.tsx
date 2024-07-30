@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,45 +11,14 @@ import {
 } from '@v4company/ui-components';
 import { Ellipsis } from 'lucide-react';
 
-import React, { useCallback } from 'react';
-import { SubmitHandler } from 'react-hook-form';
-import { IDeactivateUnitReq, updateUnit } from '../../common/services/requests/units/updateUnit';
+import React from 'react';
 
 const UnitRowActions = ({
   unitId,
-  status,
-  unit
 }: {
   unitId: string;
-  status: string;
-  unit?: any;
 }) => {
   const router = useRouter();
-
-  const onSubmit: SubmitHandler<any> = useCallback(
-    async (unit) => {
-      try {
-
-        if (!unit) {
-          return;
-        }
-
-        const payload: IDeactivateUnitReq = {
-          id: unitId,
-          cofId: unit.cofId,
-          status: 'INACTIVE',
-        };
-
-        await updateUnit(payload);
-
-        router.refresh();
-
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    [unitId, router]
-  );
 
   return (
     <DropdownMenu>
@@ -62,17 +30,10 @@ const UnitRowActions = ({
         <DropdownMenuSeparator />
         <DropdownMenuItem
           disabled
-          onClick={() => router.push(`/units/editUnit/${unitId}`)}
+          onClick={() => router.push(`/customers/${unitId}`)}
         >
-          Editar unidade
+          Visualizar clientes
         </DropdownMenuItem>
-        {status === 'ACTIVE' && (
-          <DropdownMenuItem
-            onClick={() => onSubmit(unit)}
-          >
-            Desativar unidade
-          </DropdownMenuItem>
-        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

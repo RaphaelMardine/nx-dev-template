@@ -12,45 +12,16 @@ import {
 } from '@v4company/ui-components';
 import { Ellipsis } from 'lucide-react';
 
-import React, { useCallback } from 'react';
-import { SubmitHandler } from 'react-hook-form';
-import { IDeactivateUnitReq, updateUnit } from '../../common/services/requests/units/updateUnit';
+import React from 'react';
 
 const CustomersRowActions = ({
   unitId,
-  status,
-  unit
+  customerId
 }: {
   unitId: string;
-  status: string;
-  unit?: any;
+  customerId: string;
 }) => {
   const router = useRouter();
-
-  const onSubmit: SubmitHandler<any> = useCallback(
-    async (unit) => {
-      try {
-
-        if (!unit) {
-          return;
-        }
-
-        const payload: IDeactivateUnitReq = {
-          id: unitId,
-          cofId: unit.cofId,
-          status: 'INACTIVE',
-        };
-
-        await updateUnit(payload);
-
-        router.refresh();
-
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    [unitId, router]
-  );
 
   return (
     <DropdownMenu>
@@ -61,18 +32,10 @@ const CustomersRowActions = ({
         <DropdownMenuLabel>Ações</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          disabled
-          onClick={() => router.push(`/units/editUnit/${unitId}`)}
+          onClick={() => router.push(`/deals/${customerId}?unitId=${unitId}`)}
         >
-          Editar cliente
+          Visualizar negociações
         </DropdownMenuItem>
-        {status === 'ACTIVE' && (
-          <DropdownMenuItem
-            onClick={() => onSubmit(unit)}
-          >
-            Desativar cliente
-          </DropdownMenuItem>
-        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

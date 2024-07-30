@@ -55,3 +55,14 @@ export interface IDocumentsFormCreation {
   linkContract: string;
   socialContract: File;
 }
+
+export interface IFiltersFinance {
+  customer?: string;
+  unit?: string;
+  startDatePeriod?: Date;
+  endDatePeriod?: Date;
+  status?: string;
+  minTotalAmount?: string;
+  maxTotalAmount?: string;
+  dueDate?: Date;
+}

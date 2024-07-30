@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import {
   Badge,
@@ -25,42 +25,42 @@ import {
   Tabs,
   TabsContent,
 } from '@v4company/ui-components';
-import {
-  ArrowRight,
-  File,
-  MoreVertical,
-} from 'lucide-react';
-import { UseQueryDealById } from '../../../common/services/requests/deals/getDealById';
+import { ArrowRight, MoreVertical } from 'lucide-react';
+import { UseQueryDealById } from '../../common/services/requests/deals/getDealById';
 import { useState } from 'react';
 import { convertCentsToBRL, formatDate } from '@v4company/utils';
 import { useRouter } from 'next/navigation';
-import { DealsList } from '../../../common/services/requests/deals/getDealsByCustomer';
+import { DealsList } from '../../common/services/requests/deals/getDealsByCustomer';
 import { differenceInMonths } from 'date-fns';
 
-
-export function RecentDeals({ Deals }: {Deals: DealsList[] | undefined}) {
-  const [dealSelected, setDealSelected] = useState<string>("");
+export function RecentDeals({ Deals }: { Deals: DealsList[] | undefined }) {
+  const [dealSelected, setDealSelected] = useState<string>('');
 
   let totalAmount = 0;
   let monthsByDealId = 0;
-  
+
   if (Deals) {
     Deals.forEach((item) => {
-      const months = differenceInMonths(new Date(item.endDate), new Date(item.startDate));
+      const months = differenceInMonths(
+        new Date(item.endDate),
+        new Date(item.startDate)
+      );
       totalAmount += Number(item.totalAmount) * months;
-    })
+    });
   }
-  
-  //const totalAmount = Deals?.reduce((acc, item) => acc + Number(item.totalAmount), 0);
-  const DealId = dealSelected ? dealSelected : Deals?.[0].id;
+
+  const DealId = dealSelected ? dealSelected : Deals?.[0]?.id;
   const today = new Date();
-  
+
   const router = useRouter();
-  
+
   const { data } = UseQueryDealById(DealId);
-  
-  if(data) { 
-    monthsByDealId = differenceInMonths(new Date(data?.data.endDate), new Date(data?.data.startDate));
+
+  if (data) {
+    monthsByDealId = differenceInMonths(
+      new Date(data?.data.endDate),
+      new Date(data?.data.startDate)
+    );
   }
   const DealById = data?.data;
 
@@ -85,14 +85,19 @@ export function RecentDeals({ Deals }: {Deals: DealsList[] | undefined}) {
                   </CardDescription>
                 </CardHeader>
               </Card>
-              <Card x-chunk="dashboard-05-chunk-1">
+              <Card
+                x-chunk="dashboard-05-chunk-1"
+                className="sm:col-span-2"
+              >
                 <CardHeader className="pb-2">
                   <CardDescription>Receita prevista</CardDescription>
-                  <CardTitle className="text-2xl">{convertCentsToBRL(totalAmount || 0)}</CardTitle>
+                  <CardTitle className="text-2xl">
+                    {convertCentsToBRL(totalAmount || 0)}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground">
-                    Apenas deals ativos
+                    Apenas negociações ativas
                   </div>
                 </CardContent>
                 <CardFooter>
@@ -102,7 +107,7 @@ export function RecentDeals({ Deals }: {Deals: DealsList[] | undefined}) {
                   />
                 </CardFooter>
               </Card>
-              <Card x-chunk="dashboard-05-chunk-2">
+              {/* <Card x-chunk="dashboard-05-chunk-2">
                 <CardHeader className="pb-2">
                   <CardDescription>Receita realizada</CardDescription>
                   <CardTitle className="text-2xl">R$0,00</CardTitle>
@@ -118,22 +123,9 @@ export function RecentDeals({ Deals }: {Deals: DealsList[] | undefined}) {
                     aria-label="12% increase"
                   />
                 </CardFooter>
-              </Card>
+              </Card> */}
             </div>
             <Tabs defaultValue="week">
-              <div className="flex items-center">
-                <div className="flex items-center gap-2 ml-auto">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="gap-1 text-sm h-7"
-                    disabled
-                  >
-                    <File className="h-3.5 w-3.5" />
-                    <span className="sr-only sm:not-sr-only">Export</span>
-                  </Button>
-                </div>
-              </div>
               <TabsContent value="week">
                 <Card x-chunk="dashboard-05-chunk-3">
                   <CardHeader className="px-7">
@@ -165,7 +157,14 @@ export function RecentDeals({ Deals }: {Deals: DealsList[] | undefined}) {
                         {Deals?.map((items: DealsList, key: number) => {
                           const endDate = new Date(items.endDate);
                           const startDate = new Date(items.startDate);
-                          
+
+                          const months = differenceInMonths(
+                            new Date(endDate),
+                            new Date(startDate)
+                          );
+
+                          const totalAmount =
+                            Number(items.totalAmount) * months;
                           const dealFinished = endDate > today;
                           return (
                             <TableRow
@@ -189,18 +188,15 @@ export function RecentDeals({ Deals }: {Deals: DealsList[] | undefined}) {
                               <TableCell className="hidden sm:table-cell">
                                 <Badge
                                   className="text-xs"
-                                  variant={!dealFinished
-                                      ? 'destructive'
-                                      : 'success'
+                                  variant={
+                                    !dealFinished ? 'destructive' : 'success'
                                   }
                                 >
-                                  {!dealFinished
-                                    ? 'Encerrado'
-                                    : 'Ativo'}
+                                  {!dealFinished ? 'Encerrado' : 'Ativo'}
                                 </Badge>
                               </TableCell>
                               <TableCell className="hidden md:table-cell">
-                                {convertCentsToBRL(1000)}
+                                {convertCentsToBRL(totalAmount)}
                               </TableCell>
                               <TableCell className="text-right">
                                 {formatDate(endDate)}
@@ -265,9 +261,17 @@ export function RecentDeals({ Deals }: {Deals: DealsList[] | undefined}) {
                         >
                           <span className="flex flex-col text-base text-muted-foreground">
                             {dealItems.name}{' '}
-                            <span className="text-xs">{dealItems.paymentType === "ONE_TIME" ? "Escopo fechado" : "Recorrente"}</span>
+                            <span className="text-xs">
+                              {dealItems.paymentType === 'ONE_TIME'
+                                ? 'Escopo fechado'
+                                : 'Recorrente'}
+                            </span>
                           </span>
-                          <span>{convertCentsToBRL(dealItems && dealItems.priceCents * monthsByDealId)}</span>
+                          <span>
+                            {convertCentsToBRL(
+                              dealItems && dealItems.priceCents * monthsByDealId
+                            )}
+                          </span>
                         </li>
                       );
                     })}
@@ -276,15 +280,37 @@ export function RecentDeals({ Deals }: {Deals: DealsList[] | undefined}) {
                   <ul className="grid gap-3">
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">Subtotal</span>
-                      <span>{convertCentsToBRL(DealById && DealById?.franchiseSplit.amountCents * monthsByDealId || 0)}</span>
+                      <span>
+                        {convertCentsToBRL(
+                          (DealById &&
+                            DealById?.franchiseSplit.amountCents *
+                              monthsByDealId) ||
+                            0
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Taxa da matriz</span>
-                      <span>{convertCentsToBRL(DealById && DealById?.headquarterSplit.amountCents * monthsByDealId  || 0)}</span>
+                      <span className="text-muted-foreground">
+                        Taxa da matriz
+                      </span>
+                      <span>
+                        {convertCentsToBRL(
+                          (DealById &&
+                            DealById?.headquarterSplit.amountCents *
+                              monthsByDealId) ||
+                            0
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-center justify-between font-semibold">
                       <span className="text-muted-foreground">Total</span>
-                      <span>{convertCentsToBRL(DealById && DealById?.totalAmount * monthsByDealId  || 0)}</span>
+                      <span>
+                        {convertCentsToBRL(
+                          (DealById &&
+                            DealById?.totalAmount * monthsByDealId) ||
+                            0
+                        )}
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -293,17 +319,23 @@ export function RecentDeals({ Deals }: {Deals: DealsList[] | undefined}) {
                   <div className="font-semibold">Informações de pagamento</div>
                   <dl className="grid gap-3">
                     <div className="flex items-center justify-between">
-                      <dt className="text-muted-foreground">Método de pagamento</dt>
+                      <dt className="text-muted-foreground">
+                        Método de pagamento
+                      </dt>
                       <dd>{DealById?.paymentMethod}</dd>
                     </div>
                     <div className="flex items-center justify-between">
-                      <dt className="text-muted-foreground">Dia de vencimento</dt>
+                      <dt className="text-muted-foreground">
+                        Dia de vencimento
+                      </dt>
                       <dd>
                         <a href="mailto:">{DealById?.dueDay}</a>
                       </dd>
                     </div>
                     <div className="flex items-center justify-between">
-                      <dt className="text-muted-foreground">Dia de fechamento</dt>
+                      <dt className="text-muted-foreground">
+                        Dia de fechamento
+                      </dt>
                       <dd>
                         <a href="tel:">{DealById?.closingDay}</a>
                       </dd>
@@ -315,7 +347,14 @@ export function RecentDeals({ Deals }: {Deals: DealsList[] | undefined}) {
                   <dl className="grid gap-3">
                     <div className="flex items-center justify-between">
                       <dt className="flex items-center gap-2 text-muted-foreground">
-                        <Button onClick={() => router.push(`/revenues/${DealById?.id}`)} variant={'link'}>Detalhes da receita <ArrowRight className="w-4 h-4"/> </Button>
+                        <Button
+                          onClick={() =>
+                            router.push(`/revenues/${DealById?.id}`)
+                          }
+                          variant={'link'}
+                        >
+                          Detalhes da receita <ArrowRight className="w-4 h-4" />{' '}
+                        </Button>
                       </dt>
                     </div>
                   </dl>

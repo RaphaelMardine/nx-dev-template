@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 
-
 import { DataTable } from '../../common/components/DataTable/data-table';
 import { useDataTable } from '../../common/hooks/useDataTable';
 import { useState } from 'react';

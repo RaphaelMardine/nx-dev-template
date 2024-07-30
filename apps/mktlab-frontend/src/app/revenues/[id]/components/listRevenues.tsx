@@ -33,7 +33,7 @@ export function RecentRevenues(data: IRevenueShareList) {
               </div>
               <div className="flex flex-col">
                 <div className="ml-auto font-medium">+{convertCentsToBRL(revenue.centsAmount)}</div>
-                <small>+{revenue.legalName.slice(0, 15)}</small>
+                <small>{revenue.legalName.slice(0, 15)} - {revenue.percentAmount}% </small>
               </div>
             </div>
           </div>

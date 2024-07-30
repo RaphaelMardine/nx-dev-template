@@ -6,7 +6,7 @@ import { Badge } from '@v4company/ui-components';
 import CustomersRowActions from './customersRowActions';
 import { DataTableColumnHeader } from '../../common/components/DataTable/data-table-column-header';
 import { useRouter } from 'next/navigation';
-import { ICustomersList } from '../../common/services/requests/customers/getCustomersByFranchiseId';
+import { ICustomersList } from '../../common/services/requests/customers/getCustomersList';
 
 export function GetCustomersColumn(): ColumnDef<ICustomersList>[] {
   const router = useRouter();
@@ -24,7 +24,7 @@ export function GetCustomersColumn(): ColumnDef<ICustomersList>[] {
         return (
           <div
             className="flex space-x-2"
-            onClick={() => router.push(`/units/${row.original.id}?unitId=${row.original.franchiseId}`)}
+            onClick={() => router.push(`/deals/${row.original.id}?unitId=${row.original.franchiseId}`)}
           >
             <span className="max-w-[31.25rem] truncate font-medium">
               {row.original.name || row.original.tradingName}
@@ -38,14 +38,14 @@ export function GetCustomersColumn(): ColumnDef<ICustomersList>[] {
       header: ({ column }) => (
         <DataTableColumnHeader
           column={column}
-          title="Nome legal"
+          title="Nome juridico"
         />
       ),
       cell: ({ row }) => {
         return (
           <div
             className="flex space-x-2"
-            onClick={() => router.push(`/units/${row.original.id}?unitId=${row.original.franchiseId}`)}
+            onClick={() => router.push(`/deals/${row.original.id}?unitId=${row.original.franchiseId}`)}
           >
             <span className="max-w-[31.25rem] truncate font-medium">
               {row.original.legalName}
@@ -70,7 +70,7 @@ export function GetCustomersColumn(): ColumnDef<ICustomersList>[] {
         return (
           <div
             className="flex space-x-2"
-            onClick={() => router.push(`/units/${row.original.id}?unitId=${row.original.franchiseId}`)}
+            onClick={() => router.push(`/deals/${row.original.id}?unitId=${row.original.franchiseId}`)}
           >
             <span className="max-w-[31.25rem] truncate font-medium">
             {status === 'ACTIVE' ? (
@@ -85,14 +85,13 @@ export function GetCustomersColumn(): ColumnDef<ICustomersList>[] {
     {
       id: 'actions',
       cell: ({ row }) => {
-        const unitId = row.original.id;
-        const status = row.original.status;
+        const unitId = row.original.franchiseId;
+        const customerId = row.original.id;
 
         return (
           <CustomersRowActions
             unitId={unitId}
-            status={status}
-            unit={row.original}
+            customerId={customerId}
           />
         );
       },

@@ -23,13 +23,13 @@ export interface ICustomersList {
 
 export function UseQueryCustomersList(
   page: number,
-  franchiseId: string,
+  franchiseId?: string,
 ): UseQueryResult<{
   data: ResultCustomersList;
 }> {
   return useQuery({
     queryKey: ['customerList', page, franchiseId],
     queryFn: () =>
-      lambdaApi(`customer/aggregate?page=${page}&franchiseId=${franchiseId}`),
+      lambdaApi(`customer/aggregate?page=${page}&${franchiseId ? 'franchiseId=' + franchiseId : ''}`),
   });
 }

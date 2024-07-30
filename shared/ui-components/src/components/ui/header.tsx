@@ -92,7 +92,7 @@ const HeaderProductsMenu = () => {
         <ul className="flex flex-wrap gap-y-4 *:text-white *:truncate *:text-sm *:flex *:flex-col *:p-2 *:w-1/3 *:h-24 *:items-center *:justify-center *:gap-2.5 *:hover:cursor-pointer *:transition duration-300 ease-in-out">
           <li
             className="hover:scale-105"
-            onClick={() => router.push('/units')}
+            onClick={() => router.push('/finance')}
           >
             <GalleryHorizontalEnd
               size={32}

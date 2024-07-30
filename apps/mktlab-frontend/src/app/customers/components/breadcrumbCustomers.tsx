@@ -13,7 +13,7 @@ export const BreadcrumbCustomers = () => {
     <Breadcrumb className="font-sans">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink path="/">Home</BreadcrumbLink>
+          <BreadcrumbLink path='/finance'>Financeiro</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
           <Slash />

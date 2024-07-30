@@ -3,3 +3,4 @@ export * from './dateFunctions';
 export * from './masks';
 export * from './IuguPaymentAttemptErrors';
 export * from './zodValidate';
+export * from './formatString'

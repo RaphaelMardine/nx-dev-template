@@ -113,13 +113,10 @@ export function GetColumnsUnit(): ColumnDef<IUnitList>[] {
       id: 'actions',
       cell: ({ row }) => {
         const unitId = row.original.id;
-        const status = row.original.status;
 
         return (
           <UnitRowActions
             unitId={unitId}
-            status={status}
-            unit={row.original}
           />
         );
       },

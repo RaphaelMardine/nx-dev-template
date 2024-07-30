@@ -28,7 +28,7 @@ const FlexBox = ({ children }: { children: ReactNode }) => (
 export default function Unit() {
   const [active, setActive] = useState(true);
   const [name, setName] = useState('');
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
 
   const { data } = UseQueryUnitList(page, name, active);
 
