@@ -1,14 +1,11 @@
 import './global.css';
 import 'v4design-tokens/dist/Internal-Domain/HQ_FC/css/variables.css';
 import { Noto_Sans as FontSans } from 'next/font/google';
-
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { cn } from '@v4company/ui-components/utils';
-
 import { HeaderProvider } from '@v4company/providers/header-provider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from '@v4company/contexts/auth';
-
-import jwt, { JwtPayload } from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 import { ReactQueryProvider } from '@v4company/hooks';
 import { Toaster } from '@v4company/ui-components';
