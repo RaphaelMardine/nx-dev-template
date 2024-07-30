@@ -33,3 +33,6 @@ export * from './components/ui/loading-login';
 export * from './components/ui/card';
 export * from './components/ui/collapsible';
 export * from './components/ui/text-area';
+export * from './components/ui/carousel';
+export * from './components/ui/tooltip';
+export * from './components/ui/hover-card';

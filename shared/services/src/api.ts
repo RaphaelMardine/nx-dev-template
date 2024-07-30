@@ -21,3 +21,5 @@ export const usersApi = axios.create({
 export const cepApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_CEP_API,
 });
+
+export const socketApiAWS = process.env.NEXT_PUBLIC_SOCKET_URL || '';

@@ -13,6 +13,11 @@ export const leadBrokerApi = axios.create({
   headers,
 });
 
+export const apiGateway = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_GATEWAY,
+  headers,
+});
+
 export const fileApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_STORAGE_URL,
   headers,

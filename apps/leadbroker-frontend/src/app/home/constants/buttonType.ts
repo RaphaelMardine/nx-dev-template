@@ -13,6 +13,6 @@ export const buttonType = {
   },
   overcomed: {
     label: 'Lance superado',
-    className: 'text-red-500 border-red-500',
+    className: 'text-red-700 border-red-700',
   },
 };

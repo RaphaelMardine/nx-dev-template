@@ -35,3 +35,9 @@ export const distanceInDays = (date: Date) => {
   const formatedDate = differenceInDays(new Date(), new Date(date));
   return formatedDate;
 };
+
+export function newDateTimezoneSP() {
+  return new Date(
+    new Date().toLocaleString('en', { timeZone: 'America/Sao_Paulo' })
+  );
+}

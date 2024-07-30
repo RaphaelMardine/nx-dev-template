@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { HeaderProvider } from '@v4company/providers';
-import { ReactQueryProvider } from '@v4company/hooks';
+import { ReactQueryProvider, WebsocketProvider } from '@v4company/hooks';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { MenuListContent } from '../../common';
 
@@ -15,9 +15,11 @@ export default function Providers({
   return (
     <>
       <GoogleOAuthProvider clientId={OAuthId}>
-        <HeaderProvider menuListContent={<MenuListContent />}>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
-        </HeaderProvider>
+        <WebsocketProvider plataform="leadbroker">
+          <HeaderProvider menuListContent={<MenuListContent />}>
+            <ReactQueryProvider>{children}</ReactQueryProvider>
+          </HeaderProvider>
+        </WebsocketProvider>
       </GoogleOAuthProvider>
     </>
   );

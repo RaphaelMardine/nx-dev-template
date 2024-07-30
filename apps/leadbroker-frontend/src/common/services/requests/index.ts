@@ -6,3 +6,4 @@ export * from './sendFiles';
 export * from './requestRefund';
 export * from './getDashboardUrl';
 export * from './getAuctions';
+export * from './getBalance';

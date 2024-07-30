@@ -1,15 +1,16 @@
 'use client';
 
+import { newDateTimezoneSP } from '@v4company/utils';
 import { intervalToDuration, isBefore } from 'date-fns';
 import { useEffect, useState } from 'react';
 
-export const useTicker = (futureDate: Date = new Date()) => {
-  const [now, setNow] = useState(new Date());
+export const useTicker = (futureDate: Date = newDateTimezoneSP()) => {
+  const [now, setNow] = useState(newDateTimezoneSP());
   const isTimeUp = isBefore(futureDate, now);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setNow(new Date());
+      setNow(newDateTimezoneSP());
     }, 1000);
 
     return () => {

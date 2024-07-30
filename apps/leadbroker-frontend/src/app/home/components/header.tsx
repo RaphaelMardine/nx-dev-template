@@ -1,7 +1,7 @@
 export function Header() {
   return (
     <div className="flex flex-col gap-2">
-      <h5>Lead Broker</h5>
+      <h3>Lead Broker</h3>
       <p className="text-sm">
         Aqui você pode comprar leads que se cadastraram em nossas mídias pagas e
         prospectá-los.

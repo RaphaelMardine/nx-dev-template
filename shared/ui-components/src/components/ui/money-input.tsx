@@ -18,6 +18,7 @@ type TextInputProps = {
   label: string;
   placeholder: string;
   decimal: number;
+  disabled?: boolean;
 };
 
 // Brazilian currency config
@@ -63,6 +64,7 @@ export function MoneyInput(props: TextInputProps) {
               <Input
                 placeholder={props.placeholder}
                 type="text"
+                disabled={props.disabled}
                 {...field}
                 onChange={(ev) => {
                   props?.form?.setValue(props?.name, ev.target.value);

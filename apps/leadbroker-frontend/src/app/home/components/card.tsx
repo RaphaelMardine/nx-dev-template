@@ -1,20 +1,23 @@
 import { ReactNode, useMemo } from 'react';
 import { useTicker } from '../hooks';
 import { Timer } from 'lucide-react';
-import { Button } from '@v4company/ui-components';
 import { convertCentsToBRL } from '@v4company/utils';
 import { buttonType } from '../constants';
 import { Bid } from '../../../common';
 import { useAuth } from '@v4company/contexts';
 import Image from 'next/image';
 import ExpressPurchaseImage from '../assets/express_puchase.png';
+import { addSeconds } from 'date-fns';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
+  onClick?: () => void;
+  expiresAt: Date;
 }
 interface FooterCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  handleBidAuction: () => void;
   value: number;
+  initialValue?: number;
+  refurbished?: boolean;
   bids: Bid[];
   isWinner: boolean;
   futureDate: Date;
@@ -60,19 +63,21 @@ function BadgeTypeCard({
 
 function HeaderCard({ children, className }: HeaderCardProps) {
   return (
-    <div className={`flex items-center justify-between ${className}`}>
+    <div className={`flex items-center justify-between ${className} mb-4`}>
       {children}
     </div>
   );
 }
 
 function BodyCard({ children, className }: BodyCardProps) {
-  return <div className={`flex flex-col gap-1 ${className}`}>{children}</div>;
+  return (
+    <div className={`flex flex-col gap-1 ${className} mb-1`}>{children}</div>
+  );
 }
 
 function TitleCard({ children }: { children: ReactNode }) {
   return (
-    <h6 className="text-xl font-semibold uppercase text-neutral-900">
+    <h6 className="overflow-hidden text-xl font-semibold uppercase truncate text-neutral-900 whitespace-nowrap">
       {children}
     </h6>
   );
@@ -83,18 +88,17 @@ function DetailCard({ children }: { children: ReactNode }) {
 }
 
 function TimerCard({ futureDate }: { futureDate: Date }) {
-  const { hours, isTimeUp, minutes, seconds } = useTicker(futureDate);
+  const { hours, minutes, seconds } = useTicker(futureDate);
 
   const displayTimeValue = useMemo(() => {
-    const timeValue = isTimeUp
-      ? 'Finalizado'
-      : `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
-          2,
-          '0'
-        )}:${String(seconds).padStart(2, '0')}`;
+    const timeValue = `${String(hours).padStart(2, '0')}:${String(
+      minutes
+    ).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
     return timeValue;
-  }, [hours, isTimeUp, minutes, seconds]);
+  }, [hours, minutes, seconds]);
+
+  const isFinishing = hours === 0 && minutes === 0 && seconds < 10;
 
   return (
     <div className="flex items-center gap-1">
@@ -102,14 +106,21 @@ function TimerCard({ futureDate }: { futureDate: Date }) {
         className="text-neutral-400"
         size={16}
       />
-      <span className="font-bold text-neutral-900">{displayTimeValue}</span>
+      <span
+        className={`font-bold ${
+          isFinishing ? 'text-red-600' : 'text-neutral-900'
+        }`}
+      >
+        {displayTimeValue}
+      </span>
     </div>
   );
 }
 
 function FooterCard({
-  handleBidAuction,
   value,
+  initialValue,
+  refurbished,
   bids,
   isWinner,
   futureDate,
@@ -133,18 +144,24 @@ function FooterCard({
     <div
       className={`flex flex-col justify-end gap-2 px-4 text-center ${className}`}
     >
+      <div className={!refurbished ? 'opacity-0' : ''}>
+        <p className="text-xs font-medium text-left">
+          Valor:{' '}
+          <span className="text-xs line-through">
+            {convertCentsToBRL(initialValue || 0)}
+          </span>
+        </p>
+      </div>
       <div className="py-1 border rounded-full">
         <p className="text-lg font-bold">{convertCentsToBRL(value)}</p>
       </div>
-      <Button
-        variant="outline"
-        className={`w-full rounded-full ${
+      <div
+        className={`w-full text-xs font-semibold rounded-full border py-1 ${
           buttonType[getTypeButton()].className
         }`}
-        onClick={handleBidAuction}
       >
         {buttonType[getTypeButton()].label}
-      </Button>
+      </div>
       <div>
         <p className="text-xs font-semibold text-neutral-800">
           {bids?.length} lances até o momento
@@ -172,10 +189,15 @@ function ExpressPurchase() {
   );
 }
 
-function Card({ children, className }: CardProps) {
+function Card({ children, onClick, expiresAt, className }: CardProps) {
+  const { isTimeUp } = useTicker(addSeconds(expiresAt, 10));
+
   return (
     <div
-      className={`relative flex flex-col w-64 gap-6 p-4 bg-white border rounded-lg shadow-lg ${className}`}
+      className={`hover:scale-105 cursor-pointer relative flex flex-col w-64 gap-2 p-4 bg-white border rounded-lg shadow-lg ${className} ${
+        isTimeUp ? 'hidden' : ''
+      }`}
+      onClick={onClick}
     >
       {children}
     </div>
