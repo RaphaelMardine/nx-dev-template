@@ -4,14 +4,13 @@ import { DataTable } from '../../common/components/DataTable/data-table';
 import { useDataTable } from '../../common/hooks/useDataTable';
 import { useEffect, useMemo, useState } from 'react';
 import { GetCustomersColumn } from './customerTableColumns';
-import { ICustomersList } from '../../common/services/requests/customers/getCustomersByFranchiseId';
+import { ICustomersList } from '../../common/services/requests/customers/getCustomersList';
 
 export function CustomersTable({ data }: { data: ICustomersList[] }) {
-  const [pageCount, setPageCount] = useState(1); 
+  const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
     setPageCount(Math.ceil(data.length / 10));
-
   }, [data]);
 
   const columns = useMemo(() => GetCustomersColumn(), []);
