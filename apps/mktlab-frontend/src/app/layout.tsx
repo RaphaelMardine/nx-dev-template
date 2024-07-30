@@ -42,23 +42,22 @@ export default function RootLayout({
     isValid = currentTime < expirationTime;
   }
 
-  const googleClientId = process.env.GOOGLE_CLIENT_ID || '';
+  // add to .env variable after tests PLEASE
+  const googleClientId =
+    '587184758719-eed0mnubth1t8im1t97f9d88rolns872.apps.googleusercontent.com';
 
   return (
     <html lang="en">
       <body
-        className={cn(
-          'min-h-screen font-sans antialiased',
-          fontSans.variable
-        )}
+        className={cn('min-h-screen font-sans antialiased', fontSans.variable)}
       >
         <ReactQueryProvider>
           <AuthProvider>
             <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem
+              disableTransitionOnChange
             >
               <GoogleOAuthProvider clientId={googleClientId}>
                 <HeaderProvider>{children}</HeaderProvider>
